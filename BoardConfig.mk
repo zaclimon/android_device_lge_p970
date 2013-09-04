@@ -12,8 +12,19 @@ TARGET_NO_BOOTLOADER := true
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
-ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_ARCH_VARIANT_CPU := cortex-a8
+TARGET_ARCH_VARIANT_FPU := neon
+TARGET_CPU_VARIANT := cortex-a8
 OMAP_ENHANCEMENT := true
+
+TARGET_GLOBAL_CFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
+TARGET_arm_CFLAGS := -O3 -fomit-frame-pointer -fstrict-aliasing -funswitch-loops \
+                       -fmodulo-sched -fmodulo-sched-allow-regmoves
+TARGET_thumb_CFLAGS := -mthumb \
+                        -Os \
+                        -fomit-frame-pointer \
+                        -fstrict-aliasing
 
 TARGET_BOOTLOADER_BOARD_NAME := p970
 
@@ -83,6 +94,7 @@ USE_OPENGL_RENDERER := true
 #BOARD_TOUCH_RECOVERY := true
 BOARD_CUSTOM_GRAPHICS := ../../../device/lge/p970/recovery/graphics.c
 #TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TARGET_RECOVERY_FSTAB := device/lge/p970/configs/fstab.p970
 
 BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/lge/p970/vibrator.c
 COMMON_GLOBAL_CFLAGS += -DICS_AUDIO_BLOB -DICS_CAMERA_BLOB -DOMAP_ICS_CAMERA -DHAS_CONTEXT_PRIORITY
